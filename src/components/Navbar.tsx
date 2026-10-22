@@ -14,11 +14,11 @@ export const Navbar: React.FC = () => {
 
   const navItems = [
     { name: 'Services', href: '#services' },
-    { name: 'What We Solve', href: '#problems' },
-    { name: 'Website Care', href: '#care' },
-    { name: 'AI & Automation', href: '#ai' },
-    { name: 'Process', href: '#process' },
+    { name: 'Architecture', href: '#architecture' },
+    { name: 'Estimator', href: '#calculator' },
+    { name: 'Care', href: '#care' },
     { name: 'Founder', href: '#founder' },
+    { name: 'FAQs', href: '#faq' },
   ];
 
   return (

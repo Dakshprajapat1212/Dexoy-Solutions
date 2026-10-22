@@ -2,11 +2,14 @@ import React from 'react';
 import { Hero } from '../components/Hero';
 import { ProblemMatrix } from '../components/ProblemMatrix';
 import { CapabilitiesSection } from '../components/CapabilitiesSection';
+import { ArchitectureVisualizer } from '../components/ArchitectureVisualizer';
 import { WebsiteCareHub } from '../components/WebsiteCareHub';
 import { PracticalAISection } from '../components/PracticalAISection';
 import { HowWeWork } from '../components/HowWeWork';
 import { PrototypesSection } from '../components/PrototypesSection';
+import { ProjectScopeCalculator } from '../components/ProjectScopeCalculator';
 import { FounderAccountability } from '../components/FounderAccountability';
+import { FAQSection } from '../components/FAQSection';
 import { IntakeForm } from '../components/IntakeForm';
 
 export const Home: React.FC = () => {
@@ -21,22 +24,31 @@ export const Home: React.FC = () => {
       {/* 03. Capabilities Architecture (5 Pillars) */}
       <CapabilitiesSection />
 
-      {/* 04. Website Care Hub */}
+      {/* 04. First-Principles System Architecture Topology (IIT-Grade) */}
+      <ArchitectureVisualizer />
+
+      {/* 05. Website Care Hub */}
       <WebsiteCareHub />
 
-      {/* 05. Practical AI & Automation */}
+      {/* 06. Practical AI & Automation */}
       <PracticalAISection />
 
-      {/* 06. How We Work (5-Step Process) */}
+      {/* 07. How We Work (5-Step Process) */}
       <HowWeWork />
 
-      {/* 07. Functional Demos & Prototypes */}
+      {/* 08. Functional Demos & Prototypes */}
       <PrototypesSection />
 
-      {/* 08. Founder Accountability */}
+      {/* 09. Interactive Project Scope & Milestone Calculator */}
+      <ProjectScopeCalculator />
+
+      {/* 10. Founder Accountability (Daksh Prajapat) */}
       <FounderAccountability />
 
-      {/* 09. Immediate Intake Experience */}
+      {/* 11. Engineering Transparency FAQs */}
+      <FAQSection />
+
+      {/* 12. Immediate Intake Experience (Direct WhatsApp Dispatch) */}
       <IntakeForm />
     </div>
   );
