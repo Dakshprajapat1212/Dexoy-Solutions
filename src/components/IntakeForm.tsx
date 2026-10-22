@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { getWhatsAppLink } from '../config/siteConfig';
-import { submitProjectInquiry, ProjectInquiry } from '../services/inquiryService';
 
 export const IntakeForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -20,6 +19,7 @@ export const IntakeForm: React.FC = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedRef, setSubmittedRef] = useState<string | null>(null);
+  const [submittedWhatsAppUrl, setSubmittedWhatsAppUrl] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -37,7 +37,7 @@ export const IntakeForm: React.FC = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg(null);
 
@@ -54,6 +54,8 @@ export const IntakeForm: React.FC = () => {
       return;
     }
 
+    setIsSubmitting(true);
+
     const selectedObjectives = Object.entries(formData.goals)
       .filter(([, checked]) => checked)
       .map(([key]) => {
@@ -64,33 +66,36 @@ export const IntakeForm: React.FC = () => {
         return key;
       });
 
-    const inquiryPayload: ProjectInquiry = {
-      name: formData.name.trim(),
-      businessName: formData.businessName.trim(),
-      email: formData.email.trim(),
-      phone: formData.phone.trim(),
-      preferredContact: formData.phone.trim() ? 'WhatsApp' : 'Email',
-      serviceNeeded: selectedObjectives.length > 0 ? selectedObjectives.join(', ') : 'General Consultation',
-      projectDescription: formData.problemDescription.trim(),
-      budgetRange: 'Milestone-Based',
-      expectedTimeline: 'Standard (2–4 weeks)',
-    };
+    const refId = `INQ-${Math.floor(100000 + Math.random() * 900000)}`;
 
-    setIsSubmitting(true);
+    const formattedMessage = 
+`🚀 *New Project Inquiry for Dexoy Solutions*
+
+👤 *Name:* ${formData.name.trim()}
+🏢 *Business:* ${formData.businessName.trim() || 'Not specified'}
+📧 *Email:* ${formData.email.trim() || 'Not specified'}
+📱 *Phone / WhatsApp:* ${formData.phone.trim() || 'Not specified'}
+
+🛠️ *Services Needed:*
+${selectedObjectives.length > 0 ? selectedObjectives.map(s => `• ${s}`).join('\n') : '• General Technology Consultation'}
+
+📝 *Project Details:*
+${formData.problemDescription.trim()}
+
+📌 *Ref:* ${refId}`;
+
+    const whatsAppUrl = getWhatsAppLink(formattedMessage);
+    setSubmittedRef(refId);
+    setSubmittedWhatsAppUrl(whatsAppUrl);
+
+    // Open WhatsApp directly in a new tab
     try {
-      const response = await submitProjectInquiry(inquiryPayload);
-      if (response.success) {
-        setSubmittedRef(response.refId || 'INQ-SUCCESS');
-      }
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setErrorMsg(err.message);
-      } else {
-        setErrorMsg("Failed to submit inquiry. Please message Daksh on WhatsApp directly.");
-      }
-    } finally {
-      setIsSubmitting(false);
+      window.open(whatsAppUrl, '_blank');
+    } catch {
+      // In case browser restricts direct popup
     }
+
+    setIsSubmitting(false);
   };
 
   return (
@@ -113,7 +118,7 @@ export const IntakeForm: React.FC = () => {
               Start a conversation
             </h2>
             <p className="font-body-md text-sm sm:text-base text-slate-600 mt-3 leading-relaxed">
-              Fill out this quick form or reach out directly via WhatsApp. Tell us what you're working with, and Daksh will get back to you with an honest evaluation.
+              Fill out this quick form. Your complete answers are sent directly to founder Daksh Prajapat on WhatsApp for an immediate review.
             </p>
 
             <div className="mt-8 space-y-4">
@@ -147,8 +152,8 @@ export const IntakeForm: React.FC = () => {
             <div className="flex items-center gap-3">
               <span className="material-symbols-outlined text-emerald-700 text-2xl">chat</span>
               <div>
-                <p className="text-xs font-bold text-slate-900">Prefer a real-time conversation?</p>
-                <p className="text-[11px] text-slate-600 font-mono">Chat directly with Daksh on WhatsApp</p>
+                <p className="text-xs font-bold text-slate-900">Prefer a quick chat right now?</p>
+                <p className="text-[11px] text-slate-600 font-mono">Message Daksh directly on WhatsApp</p>
               </div>
             </div>
             <motion.a 
@@ -172,29 +177,58 @@ export const IntakeForm: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5, ease: 'easeOut' as const }}
         >
-          {submittedRef ? (
-            <div className="py-12 flex flex-col items-center justify-center text-center">
-              <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-700 flex items-center justify-center mb-4 border border-emerald-200">
-                <span className="material-symbols-outlined text-3xl">check</span>
+          {submittedRef && submittedWhatsAppUrl ? (
+            <div className="py-8 flex flex-col items-center justify-center text-center">
+              <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-700 flex items-center justify-center mb-4 border border-emerald-200 shadow-xs">
+                <span className="material-symbols-outlined text-3xl">chat</span>
               </div>
-              <h3 className="font-headline-md text-xl font-bold text-slate-900">Inquiry Received</h3>
-              <p className="font-body-md text-sm text-slate-600 mt-2 max-w-md">
-                Thank you, {formData.name}. Daksh has received your inquiry details and will review them shortly.
+              <h3 className="font-headline-md text-2xl font-bold text-slate-900">
+                Inquiry Ready for Daksh!
+              </h3>
+              <p className="font-body-md text-sm text-slate-600 mt-2 max-w-md leading-relaxed">
+                Thank you, <strong className="text-slate-900">{formData.name}</strong>. All your project details have been formatted and dispatched to founder Daksh Prajapat.
               </p>
+              
               <div className="mt-4 p-3 bg-slate-50 rounded-xl border border-slate-200 font-mono text-xs text-slate-600">
-                Reference ID: <span className="font-bold text-slate-900">{submittedRef}</span>
+                Reference ID: <span className="font-bold text-slate-900">{submittedRef}</span> &bull; Number: <span className="text-emerald-700 font-bold">+91 8502099643</span>
               </div>
+
               <motion.a 
-                href={getWhatsAppLink(`Hello Daksh, I just submitted an inquiry (Ref: ${submittedRef}). Wanted to follow up here!`)}
+                href={submittedWhatsAppUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 inline-flex items-center gap-2 bg-emerald-800 hover:bg-emerald-900 text-white font-semibold text-xs py-2.5 px-4 rounded-xl transition-colors shadow-xs"
+                className="mt-6 inline-flex items-center justify-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm py-3.5 px-6 rounded-xl transition-all shadow-md shadow-emerald-700/25"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <span>Notify Daksh on WhatsApp</span>
+                <span className="material-symbols-outlined text-lg">chat</span>
+                <span>Send to Daksh on WhatsApp</span>
                 <span className="material-symbols-outlined text-sm">arrow_forward</span>
               </motion.a>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setSubmittedRef(null);
+                  setSubmittedWhatsAppUrl(null);
+                  setFormData({
+                    name: '',
+                    businessName: '',
+                    email: '',
+                    phone: '',
+                    goals: {
+                      newWebsite: false,
+                      maintainWebsite: false,
+                      automateWorkflows: false,
+                      customSoftware: false,
+                    },
+                    problemDescription: '',
+                  });
+                }}
+                className="mt-4 text-xs font-mono text-slate-500 hover:text-slate-800 underline cursor-pointer"
+              >
+                Submit another inquiry
+              </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -366,17 +400,12 @@ export const IntakeForm: React.FC = () => {
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
                 >
-                  {isSubmitting ? (
-                    <span>Submitting...</span>
-                  ) : (
-                    <>
-                      <span>Submit Inquiry to Daksh</span>
-                      <span className="material-symbols-outlined text-base">arrow_forward</span>
-                    </>
-                  )}
+                  <span className="material-symbols-outlined text-lg">chat</span>
+                  <span>Send Inquiry to Daksh via WhatsApp</span>
+                  <span className="material-symbols-outlined text-base">arrow_forward</span>
                 </motion.button>
                 <p className="text-[11px] text-center text-slate-500 font-mono mt-2.5">
-                  No spam. 100% confidential. Daksh personally responds within 6 hours.
+                  Direct dispatch to Daksh (+91 8502099643). No middleman. Direct reply within 6 hours.
                 </p>
               </div>
 
