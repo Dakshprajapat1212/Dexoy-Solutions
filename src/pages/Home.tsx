@@ -9,6 +9,7 @@ import { HowWeWork } from '../components/HowWeWork';
 import { PrototypesSection } from '../components/PrototypesSection';
 import { ProjectScopeCalculator } from '../components/ProjectScopeCalculator';
 import { FounderAccountability } from '../components/FounderAccountability';
+import { HeadOfGrowth } from '../components/HeadOfGrowth';
 import { FAQSection } from '../components/FAQSection';
 import { IntakeForm } from '../components/IntakeForm';
 
@@ -42,13 +43,16 @@ export const Home: React.FC = () => {
       {/* 09. Interactive Project Scope & Milestone Calculator */}
       <ProjectScopeCalculator />
 
-      {/* 10. Founder Accountability (Daksh Prajapat) */}
+      {/* 10. Founder Accountability (Daksh Prajapat - Founder & CEO) */}
       <FounderAccountability />
 
-      {/* 11. Engineering Transparency FAQs */}
+      {/* 11. Head of Growth (Raghav Sharma - Growth & Partnerships) */}
+      <HeadOfGrowth />
+
+      {/* 12. Engineering Transparency FAQs */}
       <FAQSection />
 
-      {/* 12. Immediate Intake Experience (Direct WhatsApp Dispatch) */}
+      {/* 13. Immediate Intake Experience (Direct WhatsApp Dispatch) */}
       <IntakeForm />
     </div>
   );

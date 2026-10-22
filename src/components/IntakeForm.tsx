@@ -407,6 +407,18 @@ ${formData.problemDescription.trim()}
                 <p className="text-[11px] text-center text-slate-500 font-mono mt-2.5">
                   Direct dispatch to Daksh (+91 8502099643). No middleman. Direct reply within 6 hours.
                 </p>
+                <p className="text-[11px] text-center text-slate-500 font-mono mt-1">
+                  Want to speak with Head of Growth instead?{' '}
+                  <a
+                    href="https://wa.me/919166909099?text=Hi%20Raghav,%20I'd%20like%20to%20discuss%20a%20partnership%20or%20project%20with%20Dexoy%20Solutions."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-700 font-semibold hover:underline inline-flex items-center gap-0.5"
+                  >
+                    <span>Chat with Raghav Sharma (+91 9166909099)</span>
+                    <span className="material-symbols-outlined text-xs">arrow_forward</span>
+                  </a>
+                </p>
               </div>
 
             </form>

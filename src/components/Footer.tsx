@@ -1,5 +1,5 @@
 import React from 'react';
-import { siteConfig, getWhatsAppLink } from '../config/siteConfig';
+import { siteConfig, getWhatsAppLink, getGrowthWhatsAppLink } from '../config/siteConfig';
 
 export const Footer: React.FC = () => {
   return (
@@ -62,31 +62,43 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Col 3: Direct Advisory */}
+          {/* Col 3: Direct Leadership Lines */}
           <div className="lg:col-span-3 flex flex-col gap-2">
             <h4 className="font-label-md text-xs text-on-surface font-semibold tracking-wide uppercase mb-2">
-              Direct Advisory
+              Direct Advisory Lines
             </h4>
             <div className="space-y-3 text-xs">
               <div className="flex flex-col">
-                <span className="font-label-sm text-[10px] uppercase tracking-wider text-on-surface-variant">Direct Line</span>
-                <span className="font-body-sm text-on-surface font-medium mt-0.5">{siteConfig.contact.phone}</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-label-sm text-[10px] uppercase tracking-wider text-on-surface-variant">Direct Dispatch</span>
-                <span className="font-body-sm text-on-surface font-medium mt-0.5">{siteConfig.contact.email}</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-label-sm text-[10px] uppercase tracking-wider text-on-surface-variant">Real-Time Channel</span>
+                <span className="font-label-sm text-[10px] uppercase tracking-wider text-emerald-800 font-bold">Founder &amp; Engineering</span>
+                <span className="font-body-sm text-on-surface font-medium mt-0.5">Daksh Prajapat &bull; {siteConfig.founder.phone}</span>
                 <a 
                   href={getWhatsAppLink()} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="font-body-sm text-primary-container font-medium hover:underline mt-0.5 flex items-center gap-1"
+                  className="font-mono text-[11px] text-emerald-700 font-medium hover:underline mt-0.5 flex items-center gap-1"
                 >
-                  <span>WhatsApp Founder Direct</span>
+                  <span>WhatsApp Daksh Direct</span>
                   <span className="material-symbols-outlined text-xs">arrow_forward</span>
                 </a>
+              </div>
+
+              <div className="flex flex-col pt-1 border-t border-surface-container">
+                <span className="font-label-sm text-[10px] uppercase tracking-wider text-blue-800 font-bold">Head of Growth</span>
+                <span className="font-body-sm text-on-surface font-medium mt-0.5">Raghav Sharma &bull; {siteConfig.growthLead.phone}</span>
+                <a 
+                  href={getGrowthWhatsAppLink()} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="font-mono text-[11px] text-blue-700 font-medium hover:underline mt-0.5 flex items-center gap-1"
+                >
+                  <span>WhatsApp Raghav Direct</span>
+                  <span className="material-symbols-outlined text-xs">arrow_forward</span>
+                </a>
+              </div>
+
+              <div className="flex flex-col pt-1 border-t border-surface-container">
+                <span className="font-label-sm text-[10px] uppercase tracking-wider text-on-surface-variant">Email Dispatch</span>
+                <span className="font-body-sm text-on-surface font-medium mt-0.5">{siteConfig.contact.email}</span>
               </div>
             </div>
           </div>
@@ -98,12 +110,13 @@ export const Footer: React.FC = () => {
             </h4>
             <nav className="flex flex-col space-y-1.5 text-xs text-on-surface-variant">
               <a className="hover:text-on-surface transition-colors" href="#services">Services</a>
-              <a className="hover:text-on-surface transition-colors" href="#problems">Problem Matrix</a>
+              <a className="hover:text-on-surface transition-colors" href="#architecture">Architecture</a>
+              <a className="hover:text-on-surface transition-colors" href="#calculator">Estimator</a>
               <a className="hover:text-on-surface transition-colors" href="#care">Website Care</a>
-              <a className="hover:text-on-surface transition-colors" href="#ai">Practical AI</a>
-              <a className="hover:text-on-surface transition-colors" href="#process">Process</a>
-              <a className="hover:text-on-surface transition-colors" href="#prototypes">Prototypes</a>
-              <a className="hover:text-on-surface transition-colors" href="#founder">Founder</a>
+              <a className="hover:text-on-surface transition-colors" href="#founder">Founder Daksh</a>
+              <a className="hover:text-on-surface transition-colors" href="#growth">Growth Raghav</a>
+              <a className="hover:text-on-surface transition-colors" href="#faq">Engineering FAQs</a>
+              <a className="hover:text-on-surface transition-colors" href="#intake">Project Intake</a>
             </nav>
           </div>
 

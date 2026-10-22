@@ -133,6 +133,19 @@ export const FounderAccountability: React.FC = () => {
                 ))}
               </div>
 
+              {/* Leadership note */}
+              <div className="pt-2 flex flex-wrap items-center gap-3 text-xs text-slate-500 font-mono">
+                <span className="inline-flex items-center gap-1.5 text-slate-700 font-bold">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                  Systems &amp; Architecture: Daksh Prajapat
+                </span>
+                <span>&bull;</span>
+                <a href="#growth" className="inline-flex items-center gap-1.5 text-blue-700 font-bold hover:underline">
+                  <span className="w-2 h-2 rounded-full bg-blue-500" />
+                  Growth &amp; Partnerships: Raghav Sharma &rarr;
+                </a>
+              </div>
+
             </div>
 
           </div>

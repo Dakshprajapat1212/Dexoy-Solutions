@@ -10,11 +10,24 @@ export interface Founder {
   location: string;
 }
 
+export interface TeamMember {
+  name: string;
+  role: string;
+  title: string;
+  bio: string;
+  phone: string;
+  whatsappNumber: string;
+  location: string;
+  email?: string;
+  focus: string[];
+}
+
 export interface SiteConfig {
   companyName: string;
   tagline: string;
   positioning: string;
   founder: Founder;
+  growthLead: TeamMember;
   contact: {
     email: string;
     phone: string;
@@ -39,6 +52,21 @@ export const siteConfig: SiteConfig = {
     phone: import.meta.env.VITE_CONTACT_PHONE || "+91 8502099643",
     location: import.meta.env.VITE_COMPANY_LOCATION || "Newai, Rajasthan, India"
   },
+  growthLead: {
+    name: "Raghav Sharma",
+    role: "Head of Growth",
+    title: "Head of Growth & Strategic Partnerships",
+    bio: "Leads client expansion, commercial feasibility, and strategic partnerships. Ensures every technology solution directly powers client revenue and business scaling.",
+    phone: "+91 9166909099",
+    whatsappNumber: "+91 9166909099",
+    location: "Jaipur, Rajasthan, India",
+    focus: [
+      "Client Partnerships & Growth Strategy",
+      "Scope Feasibility & Commercial Roadmapping",
+      "Enterprise & SME Solution Delivery",
+      "Dedicated Client Success & SLA Governance"
+    ]
+  },
   contact: {
     email: import.meta.env.VITE_CONTACT_EMAIL || "dakshprajapat1212@gmail.com",
     phone: import.meta.env.VITE_CONTACT_PHONE || "+91 8502099643",
@@ -54,5 +82,14 @@ export const siteConfig: SiteConfig = {
 export function getWhatsAppLink(customMessage?: string): string {
   const cleanNumber = siteConfig.contact.whatsappNumber.replace(/[^0-9]/g, '');
   const text = customMessage || "Hi Daksh, I'd like to discuss a technology project for my business.";
+  return `https://wa.me/${cleanNumber}?text=${encodeURIComponent(text)}`;
+}
+
+/**
+ * Generates a direct WhatsApp link to Head of Growth Raghav Sharma
+ */
+export function getGrowthWhatsAppLink(customMessage?: string): string {
+  const cleanNumber = siteConfig.growthLead.whatsappNumber.replace(/[^0-9]/g, '');
+  const text = customMessage || "Hi Raghav, I'd like to discuss a growth and technology collaboration with Dexoy Solutions.";
   return `https://wa.me/${cleanNumber}?text=${encodeURIComponent(text)}`;
 }
