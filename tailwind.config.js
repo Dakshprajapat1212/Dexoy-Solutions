@@ -1,0 +1,67 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        "surface": "#fbfbfa",
+        "surface-bright": "#ffffff",
+        "surface-container-lowest": "#ffffff",
+        "surface-container-low": "#f5f6f8",
+        "surface-container": "#eceef2",
+        "surface-container-high": "#e1e4ea",
+        "surface-container-highest": "#d5d9e2",
+        "surface-dim": "#dadde4",
+        "on-surface": "#111827",
+        "on-surface-variant": "#475569",
+        "outline": "#64748b",
+        "outline-variant": "#cbd5e1",
+        "primary": "#0a2920",
+        "primary-container": "#133e31",
+        "on-primary": "#ffffff",
+        "on-primary-container": "#a7f3d0",
+        "primary-fixed": "#d1fae5",
+        "on-primary-fixed": "#064e3b",
+        "tertiary": "#0f172a",
+        "tertiary-container": "#1e293b",
+        "tertiary-fixed-dim": "#cbd5e1",
+        "on-tertiary-container": "#94a3b8",
+        "accent-sand": "#f1f3f6",
+        "google-blue": "#1a73e8",
+        "emerald-accent": "#059669",
+        "error": "#dc2626",
+        "error-container": "#fee2e2",
+        "on-error-container": "#991b1b",
+      },
+      fontFamily: {
+        "display-lg": ["Plus Jakarta Sans", "sans-serif"],
+        "headline-xl": ["Plus Jakarta Sans", "sans-serif"],
+        "headline-lg": ["Plus Jakarta Sans", "sans-serif"],
+        "headline-md": ["Plus Jakarta Sans", "sans-serif"],
+        "headline-sm": ["Plus Jakarta Sans", "sans-serif"],
+        "body-lg": ["IBM Plex Sans", "sans-serif"],
+        "body-md": ["IBM Plex Sans", "sans-serif"],
+        "body-sm": ["IBM Plex Sans", "sans-serif"],
+        "label-md": ["IBM Plex Sans", "sans-serif"],
+        "label-sm": ["IBM Plex Sans", "sans-serif"],
+        "mono": ["JetBrains Mono", "monospace"]
+      },
+      spacing: {
+        "margin-tablet": "2.5rem",
+        "gutter-desktop": "2rem",
+        "margin-desktop": "4rem",
+        "space-sm": "0.5rem",
+        "space-md": "1rem",
+        "space-lg": "1.5rem",
+        "space-xs": "0.25rem",
+        "gutter": "1.5rem",
+        "margin": "1.25rem",
+        "space-xl": "2.5rem"
+      }
+    },
+  },
+  plugins: [],
+}
